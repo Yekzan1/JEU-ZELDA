@@ -1,1 +1,21 @@
 
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: emscripten/emsdk:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          # Cette commande compile TOUS les .c qui sont à la racine
+          emcc *.c -o index.html -s USE_SDL=2 -s USE_SDL_IMAGE=2 --preload-file assets -O3
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
