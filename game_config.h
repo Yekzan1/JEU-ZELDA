@@ -1,0 +1,14 @@
+#ifndef GAME_CONFIG_H
+#define GAME_CONFIG_H
+
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+#define TILE_SIZE 32
+#define PLAYER_SIZE 32
+#define ENEMY_SIZE 28
+#define MAX_PARTICLES 100
+#define MAX_ENEMIES 10
+#define MAX_HEALTH 6
+#define ENEMY_HEALTH 3
+
+#endif // GAME_CONFIG_H

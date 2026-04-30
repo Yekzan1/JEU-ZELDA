@@ -1,0 +1,33 @@
+CC = gcc
+CFLAGS = -O2 -Wall -Wextra -Iinclude `sdl2-config --cflags`
+LDFLAGS = `sdl2-config --libs` -lSDL2_image -lm
+
+SRC_DIR = src
+SRC_FILES = main.c \
+	$(SRC_DIR)/player.c \
+	$(SRC_DIR)/particle.c \
+	$(SRC_DIR)/enemy.c \
+	$(SRC_DIR)/game_map.c \
+	$(SRC_DIR)/game.c \
+	$(SRC_DIR)/world.c \
+	$(SRC_DIR)/hud.c \
+	$(SRC_DIR)/item.c \
+	$(SRC_DIR)/dungeon.c \
+	$(SRC_DIR)/quest.c
+
+OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
+
+TARGET = zelda_game
+
+all: $(TARGET)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -o $@ $(LDFLAGS)
+
+clean:
+	rm -f $(OBJ_FILES) $(TARGET)
+
+.PHONY: all clean
